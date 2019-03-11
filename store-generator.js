@@ -52,49 +52,56 @@ const questionGenerator = async (totalQuestion) => {
   const quesArr = [];
 
 
-  const questionTypes = [{type: "easy", mark: 1},  {type: "medium", mark: 2}, , {type:"hard", mark: 4}];
+  const questionTypes = [{type: "easy", mark: 1},  {type: "medium", mark: 4}, , {type:"hard", mark: 7}];
+ 
 
   questionTypes.forEach(element => {
-    let tempArr = [];
+    let mark = element.mark;
+    let z = 0;
+    while (z < 3) {
+      let tempArr = [];
 
-    let a, b, question, answer, option1, option2, option3;
+      let a, b, question, answer, option1, option2, option3;
 
-    let i = 0;
-    while (i < Math.floor(totalQuestion / 3)) {
-      a = getRandomInt(quesArr.length);
-      b = getRandomInt(quesArr.length);
-  
-      if (b === 0 ) {
-        b = 10;
+      let i = 0;
+      while (i < Math.floor(totalQuestion / 3)) {
+        a = getRandomInt(quesArr.length);
+        b = getRandomInt(quesArr.length);
+    
+        if (b === 0 ) {
+          b = 10;
+        }
+    
+        let operator = operators[ getRandomInt(operators.length) ];
+    
+        question = `${a}${operator}${b}`;
+    
+        answer = getAnswer(a, b, operator);
+        tempArr.push(answer.toString());
+    
+        option1 = answer + getRandomPositiveInt(10);
+    
+        tempArr.push(option1.toString());
+    
+        option2 = option1 + getRandomPositiveInt(10);
+    
+        tempArr.push(option2.toString());
+    
+        option3 = option2 + getRandomPositiveInt(10);
+    
+        tempArr.push(option3.toString());
+    
+        tempArr = shuffleArr(tempArr);
+    
+        let data = {"question": question, "options": tempArr, "subject":"maths", "topic":"arithmetic", "marks":mark, "difficulty": element.type };
+    
+        quesArr.push(data);
+    
+        tempArr = [];
+        i++;
       }
-  
-      let operator = operators[ getRandomInt(operators.length) ];
-  
-      question = `${a}${operator}${b}`;
-  
-      answer = getAnswer(a, b, operator);
-      tempArr.push(answer.toString());
-  
-      option1 = answer + getRandomPositiveInt(10);
-  
-      tempArr.push(option1.toString());
-  
-      option2 = option1 + getRandomPositiveInt(10);
-  
-      tempArr.push(option2.toString());
-  
-      option3 = option2 + getRandomPositiveInt(10);
-  
-      tempArr.push(option3.toString());
-  
-      tempArr = shuffleArr(tempArr);
-  
-      let data = {"question": question, "options": tempArr, "subject":"maths", "topic":"arithmetic", "marks":element.mark, "difficulty": element.type };
-  
-      quesArr.push(data);
-  
-      tempArr = [];
-      i++;
+      z++;
+      mark++;
     }
   });
 
@@ -107,6 +114,6 @@ const questionGenerator = async (totalQuestion) => {
 
 };
 
-questionGenerator(1000); // you can set the number of questions you can store on question store
+questionGenerator(50); // you can set the number of questions you can store on question store
 
 
