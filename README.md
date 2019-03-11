@@ -8,4 +8,4 @@ generate question paper bassed on the store
     
   ### Generate question paper
 1. `node index.js`
-  * Generate question paper based on total marks and percentage distribution of easy, medium, hard (you can total marks, difficulty distribution inside the functions)
+  * Randomly Generate question paper based on total marks and percentage distribution of easy, medium, hard (you can total marks, difficulty distribution inside the functions)
