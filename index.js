@@ -5,7 +5,6 @@ fs.writeFile("question-paper.json", [], function(err) {
   if(err) {
       return console.log(err);
   }
-  console.log("File saved successfully!");
 });
 
 
@@ -34,7 +33,9 @@ function questionGenerator (totalMarks, easy, medium, hard) {
     const mediumArrIndex = findPossiblePath(totalMediumMarks, totalMediumQuestionsStore, totalMediumQuestionsStore.length);
     const hardArrIndex = findPossiblePath(totalHardMarks, totalHardQuestionsStore, totalHardQuestionsStore.length);
 
-    if (!easyArrIndex.length || !mediumArrIndex.length || !hardArrIndex.length) {
+
+
+    if ((totalEasyMarks.length && !easyArrIndex.length) || (totalMediumMarks.length && !mediumArrIndex.length) || (totalHardMarks.length && !hardArrIndex.length)) {
       console.log('Question difficulty distribution not possible');
       return;
     }
@@ -61,7 +62,7 @@ function questionGenerator (totalMarks, easy, medium, hard) {
   });
 };
 
-questionGenerator(100, 10, 30, 60); // (totalMarks, easy, medium, hard)
+questionGenerator(100, 0, 40, 60); // (totalMarks, easy, medium, hard)
 
 
 function findPossiblePath(W, weight, n) {
