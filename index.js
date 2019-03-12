@@ -9,8 +9,8 @@ fs.writeFile("question-paper.json", [], function(err) {
 
 
 function questionGenerator (totalMarks, easy, medium, hard) {
-  if ((easy + medium + hard) > 100) {
-    console.log('total percentage distribution must be less or equal to 100');
+  if ((easy + medium + hard) != 100) {
+    console.log('total percentage distribution must be equal to 100');
     return;
   }
   const totalEasyMarks = Math.round(totalMarks * (easy ? easy: 0) * (1 / 100));
